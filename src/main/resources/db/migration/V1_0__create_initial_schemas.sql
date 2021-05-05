@@ -1,16 +1,7 @@
 CREATE TABLE IF NOT EXISTS regions
 (
     RegionID serial NOT NULL PRIMARY KEY,
-    Region   varchar(255)
-);
-
-CREATE TABLE IF NOT EXISTS posts
-(
-    PostID serial NOT NULL PRIMARY KEY,
-    Content varchar(255) NOT NULL,
-    Created timestamp NOT NULL,
-    Updated timestamp,
-    UserID int NOT NULL
+    Region   varchar(255) UNIQUE
 );
 
 CREATE TABLE IF NOT EXISTS users
@@ -20,4 +11,15 @@ CREATE TABLE IF NOT EXISTS users
     LastName varchar(255) NOT NULL,
     RegionID int NOT NULL,
     Role varchar(50)
+);
+
+CREATE TABLE IF NOT EXISTS posts
+(
+    PostID serial NOT NULL PRIMARY KEY,
+    Content varchar(255) NOT NULL,
+    Created timestamp NOT NULL,
+    Updated timestamp,
+    UserId int,
+    FOREIGN KEY (UserId) REFERENCES users(UserID)
 )
+

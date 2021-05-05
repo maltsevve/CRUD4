@@ -13,27 +13,25 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "users")
-@Data @Getter @Setter @NoArgsConstructor
+@Data
+@Getter
+@Setter
+@NoArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "UserId")
     private Long id;
-
     @Column(name = "FirstName")
     private String firstName;
-
     @Column(name = "LastName")
     private String lastName;
-
-    @OneToMany/*(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")*/
-    @LazyCollection(LazyCollectionOption.TRUE)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Post> posts;
-
     @OneToOne
-    @JoinColumn(name = "RegionId")
+    @JoinColumn(name = "RegionID")
     private Region region;
-
     @Column(name = "Role")
+    @Enumerated(EnumType.STRING)
     private Role role;
 }

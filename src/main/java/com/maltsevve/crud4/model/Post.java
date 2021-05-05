@@ -1,9 +1,7 @@
 package com.maltsevve.crud4.model;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.sun.istack.NotNull;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -22,4 +20,7 @@ public class Post {
     private Date created;
     @Column(name = "Updated")
     private Date updated;
+    @ManyToOne
+    @JoinColumn(name = "UserId")
+    private User user;
 }

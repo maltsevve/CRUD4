@@ -1,7 +1,6 @@
 package com.maltsevve.crud4.repository;
 
 import com.maltsevve.crud4.model.Region;
-import com.maltsevve.crud4.model.builders.region.RegionDirector;
 import com.maltsevve.crud4.util.HibernateSessionFactory;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -12,8 +11,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class JavaIORegionRepositoryImpl implements RegionRepository {
-    private final static RegionDirector REGION_DIRECTOR = new RegionDirector();
-
     public JavaIORegionRepositoryImpl() {
 
     }
@@ -37,12 +34,32 @@ public class JavaIORegionRepositoryImpl implements RegionRepository {
             }
         }
 
-        return region;
+        if (region.getId() != null) {
+            return region;
+        } else {
+            List<Region> regions = getAll();
+            return regions.stream().filter(r -> region.getName().equals(r.getName())).findFirst().orElse(null);
+        }
     }
 
     @Override
     public Region update(Region region) {
-        List<Region> regions = getAll();
+        Session session = null;
+        Transaction transaction = null;
+
+        try {
+            session = HibernateSessionFactory.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            session.update(region);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
 
         return region;
     }
@@ -50,6 +67,22 @@ public class JavaIORegionRepositoryImpl implements RegionRepository {
     @Override
     public Region getById(Long aLong) {
         Region region = null;
+        Session session = null;
+        Transaction transaction = null;
+
+        try {
+            session = HibernateSessionFactory.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            region = session.get(Region.class, aLong);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
 
         return region;
     }
@@ -64,6 +97,7 @@ public class JavaIORegionRepositoryImpl implements RegionRepository {
             session = HibernateSessionFactory.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             regions = session.createQuery("FROM Region").list();
+            transaction.commit();
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();
             e.printStackTrace();
@@ -78,6 +112,22 @@ public class JavaIORegionRepositoryImpl implements RegionRepository {
 
     @Override
     public void deleteById(Long aLong) {
+        Session session = null;
+        Transaction transaction = null;
 
+        try {
+            session = HibernateSessionFactory.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            Region region = session.get(Region.class, aLong);
+            session.delete(region);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
     }
 }
