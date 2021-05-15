@@ -38,10 +38,9 @@ public class RegionView {
                     if (input.matches("^([A-zА-яё]+)([\\s-]?[A-zА-яё])*$")) {
                         regionDirector.setRegionBuilder(new ActualRegionBuilder(input));
                         regionController.save(regionDirector.buildRegion());
-                        System.out.println();
                     } else {
                         System.out.println("Region name can only contain the letters A-z/A-z" +
-                                " and the characters: 'space' and '-'\n");
+                                " and the characters: 'space' and '-'");
                     }
 
                     logic();
@@ -68,14 +67,14 @@ public class RegionView {
 
                                 regionController.update(region);
                             } else {
-                                System.out.println("The entered name is identical to the existing one.\n");
+                                System.out.println("The entered name is identical to the existing one.");
                             }
                         } else {
-                            System.out.println("No region with specified ID in the data base.\n");
+                            System.out.println("No region with specified ID in the data base.");
                         }
                     } else {
                         System.out.println("Region name can only contain the letters A-z/A-z" +
-                                " and the characters: 'space' and '-'\n");
+                                " and the characters: 'space' and '-'");
                     }
 
                     logic();
@@ -91,12 +90,12 @@ public class RegionView {
                         Region region = regionController.getById(Long.parseLong(input));
 
                         if (region != null) {
-                            System.out.println(region.getId() + " " + region.getName() + "\n");
+                            System.out.println(region.getId() + " " + region.getName());
                         } else {
-                            System.out.println("No such region in the data base.\n");
+                            System.out.println("No such region in the data base.");
                         }
                     } else {
-                        System.out.println("Invalid ID.\n");
+                        System.out.println("Invalid ID.");
                     }
 
                     logic();
@@ -108,9 +107,8 @@ public class RegionView {
 
                     if (!regionList.isEmpty()) {
                         regionList.forEach((r) -> System.out.println(r.getId() + " " + r.getName()));
-                        System.out.println();
                     } else {
-                        System.out.println("Table is empty.\n");
+                        System.out.println("Table is empty.");
                     }
 
                     logic();
@@ -144,12 +142,12 @@ public class RegionView {
                 }
 
                 default -> { // Invalid input
-                    System.out.println("Non-existent menu item. Try again.\n");
+                    System.out.println("Non-existent menu item. Try again.");
                     logic();
                 }
             }
         } else {
-            System.out.println("Use digits from 1 to 6.\n");
+            System.out.println("Use digits from 1 to 6.");
             logic();
         }
     }
