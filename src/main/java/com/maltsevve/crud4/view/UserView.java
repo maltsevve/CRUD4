@@ -33,6 +33,7 @@ public class UserView {
     }
 
     public void logic() {
+        System.out.println();
         userMenu();
 
         String input = ClientInput.getScanner().nextLine();
@@ -110,8 +111,6 @@ public class UserView {
                         System.out.println("Invalid ID.");
                     }
 
-                    System.out.println();
-
                     logic();
                 }
 
@@ -134,6 +133,8 @@ public class UserView {
                                 }
                             }
                         }
+                    } else {
+                        System.out.println("Table is empty.");
                     }
 
                     logic();
@@ -157,8 +158,6 @@ public class UserView {
                     } else {
                         System.out.println("Invalid ID.");
                     }
-
-                    System.out.println();
 
                     logic();
                 }

@@ -1,12 +1,13 @@
 package com.maltsevve.crud4.repository;
 
-import com.maltsevve.crud4.model.Post;
 import com.maltsevve.crud4.model.User;
 import com.maltsevve.crud4.util.HibernateSessionFactory;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class JavaIOUserRepositoryImpl implements UserRepository {
@@ -115,8 +116,8 @@ public class JavaIOUserRepositoryImpl implements UserRepository {
         try {
             session = HibernateSessionFactory.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            Post post = session.load(Post.class, aLong);
-            session.delete(post);
+            User user = session.load(User.class, aLong);
+            session.delete(user);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();

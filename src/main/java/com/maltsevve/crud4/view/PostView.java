@@ -38,6 +38,7 @@ public class PostView {
             long id = Long.parseLong(input);
 
             if (id == 0) {
+                System.out.println();
                 start();
             } else {
                 if (userController.getById(id) != null) {
@@ -59,6 +60,7 @@ public class PostView {
         if (!isUserSelected) {
             setUserId();
         } else {
+            System.out.println();
             postMenu();
             String input = ClientInput.getScanner().nextLine();
 
@@ -72,7 +74,6 @@ public class PostView {
                         Post post = postDirector.buildPost();
                         post.setUser(userController.getById(userId));
                         postController.save(post);
-                        System.out.println();
 
                         logic();
                     }
@@ -100,7 +101,6 @@ public class PostView {
                             System.out.println("Invalid input format.");
                         }
 
-                        System.out.println();
                         logic();
                     }
 
@@ -156,8 +156,6 @@ public class PostView {
                         } else {
                             System.out.println("Invalid ID.");
                         }
-
-                        System.out.println();
 
                         logic();
                     }
