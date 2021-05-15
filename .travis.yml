@@ -1,6 +1,5 @@
 language: java
 jdk: oraclejdk14
-os: windows
 cache:
   directories:
     - $HOME/.m2
