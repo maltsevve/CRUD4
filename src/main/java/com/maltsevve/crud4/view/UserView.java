@@ -33,7 +33,6 @@ public class UserView {
     }
 
     public void logic() {
-        System.out.println();
         userMenu();
 
         String input = ClientInput.getScanner().nextLine();

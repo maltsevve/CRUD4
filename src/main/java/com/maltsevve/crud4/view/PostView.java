@@ -59,7 +59,6 @@ public class PostView {
         if (!isUserSelected) {
             setUserId();
         } else {
-            System.out.println();
             postMenu();
             String input = ClientInput.getScanner().nextLine();
 
