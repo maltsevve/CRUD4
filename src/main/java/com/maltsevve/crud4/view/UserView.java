@@ -2,6 +2,7 @@ package com.maltsevve.crud4.view;
 
 import com.maltsevve.crud4.controller.RegionController;
 import com.maltsevve.crud4.controller.UserController;
+import com.maltsevve.crud4.model.Post;
 import com.maltsevve.crud4.model.Region;
 import com.maltsevve.crud4.model.Role;
 import com.maltsevve.crud4.model.User;
@@ -93,7 +94,16 @@ public class UserView {
                         if (user != null) {
                             System.out.println(user.getId() + " " + user.getFirstName() + " " + user.getLastName() +
                                     " Region: " + user.getRegion() + " Role: " + user.getRole());
-                            user.getPosts().forEach(System.out::println);
+                            if (!user.getPosts().isEmpty()) {
+                                for (Post post : user.getPosts()) {
+                                    System.out.println("Post{" +
+                                            "id=" + post.getId() +
+                                            ", content='" + post.getContent() + '\'' +
+                                            ", created=" + post.getCreated() +
+                                            ", updated=" + post.getUpdated() +
+                                            '}');
+                                }
+                            }
                         } else {
                             System.out.println("No such user in the data base.");
                         }
@@ -115,7 +125,14 @@ public class UserView {
                             System.out.println(user.getId() + " " + user.getFirstName() + " " + user.getLastName() +
                                     " Region: " + user.getRegion() + " Role: " + user.getRole());
                             if (!user.getPosts().isEmpty()) {
-                                user.getPosts().forEach(System.out::println);
+                                for (Post post : user.getPosts()) {
+                                    System.out.println("Post{" +
+                                            "id=" + post.getId() +
+                                            ", content='" + post.getContent() + '\'' +
+                                            ", created=" + post.getCreated() +
+                                            ", updated=" + post.getUpdated() +
+                                            '}');
+                                }
                             }
                         }
                     }

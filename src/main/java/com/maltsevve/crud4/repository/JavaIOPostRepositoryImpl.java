@@ -116,7 +116,7 @@ public class JavaIOPostRepositoryImpl implements PostRepository {
         try {
             session = HibernateSessionFactory.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            Post post = session.get(Post.class, aLong);
+            Post post = session.load(Post.class, aLong);
             session.delete(post);
             transaction.commit();
         } catch (Exception e) {

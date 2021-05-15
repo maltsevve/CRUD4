@@ -20,7 +20,7 @@ public class Post {
     private Date created;
     @Column(name = "Updated")
     private Date updated;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "UserId")
     private User user;
 }
