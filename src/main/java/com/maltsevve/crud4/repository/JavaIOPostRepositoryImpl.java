@@ -51,7 +51,10 @@ public class JavaIOPostRepositoryImpl implements PostRepository {
             session.update(post);
             transaction.commit();
         } catch (Exception e) {
-            if (transaction != null) transaction.rollback();
+            if (transaction != null) {
+                transaction.rollback();
+                post.setUpdated(null);
+            }
             e.printStackTrace();
         } finally {
             if (session != null && session.isOpen()) {
