@@ -1,5 +1,7 @@
 package com.maltsevve.crud4.view;
 
+import com.maltsevve.crud4.util.HibernateSessionFactory;
+
 public class Console {
     static UserView userView = new UserView();
     static PostView postView = new PostView();
@@ -18,7 +20,10 @@ public class Console {
                 case 1 -> userView.logic();
                 case 2 -> postView.logic();
                 case 3 -> regionView.logic();
-                case 4 -> ClientInput.getScanner().close();
+                case 4 -> {
+                    ClientInput.getScanner().close();
+                    HibernateSessionFactory.getSessionFactory().close();
+                }
                 default -> {
                     System.out.println("Non-existent menu item. Try again.\n");
                     showMainMenu();

@@ -27,7 +27,7 @@ public class User {
     private String firstName;
     @Column(name = "LastName")
     private String lastName;
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Post> posts;
     @OneToOne
     @JoinColumn(name = "RegionID")

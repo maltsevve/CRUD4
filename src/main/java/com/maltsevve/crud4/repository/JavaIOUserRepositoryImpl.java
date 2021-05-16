@@ -94,7 +94,7 @@ public class JavaIOUserRepositoryImpl implements UserRepository {
         try {
             session = HibernateSessionFactory.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            users = session.createQuery("FROM User").list();
+            users = (List<User>)session.createQuery("FROM User u LEFT JOIN FETCH u.posts").list();
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();
