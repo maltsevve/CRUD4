@@ -164,7 +164,7 @@ public class UserView {
 
                 case 6 -> { // Return to main menu
                     System.out.println();
-                    start();
+                    break;
                 }
 
                 default -> { // Invalid input

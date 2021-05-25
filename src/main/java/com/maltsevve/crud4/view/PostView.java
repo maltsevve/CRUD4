@@ -166,7 +166,7 @@ public class PostView {
 
                     case 7 -> { // Return to main menu
                         System.out.println();
-                        start();
+                        break;
                     }
 
                     default -> { // Invalid input
