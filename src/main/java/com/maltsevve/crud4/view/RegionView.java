@@ -138,7 +138,6 @@ public class RegionView {
 
                 case 6 -> { // Return to main menu
                     System.out.println();
-                    break;
                 }
 
                 default -> { // Invalid input

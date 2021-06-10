@@ -4,6 +4,7 @@ import com.maltsevve.crud4.model.User;
 import com.maltsevve.crud4.util.HibernateSessionFactory;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.jpa.QueryHints;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -94,7 +95,8 @@ public class JavaIOUserRepositoryImpl implements UserRepository {
         try {
             session = HibernateSessionFactory.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            users = (List<User>)session.createQuery("FROM User u LEFT JOIN FETCH u.posts").list();
+            users = (List<User>)session.createQuery("SELECT DISTINCT user FROM User user LEFT JOIN FETCH user.posts").
+                    setHint(QueryHints.HINT_PASS_DISTINCT_THROUGH, false).getResultList();
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();
