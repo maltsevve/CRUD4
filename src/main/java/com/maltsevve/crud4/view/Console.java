@@ -17,9 +17,18 @@ public class Console {
 
         if (input.matches("\\d+")) {
             switch (Integer.parseInt(input)) {
-                case 1 -> userView.logic();
-                case 2 -> postView.logic();
-                case 3 -> regionView.logic();
+                case 1 -> {
+                    userView.logic();
+                    start();
+                }
+                case 2 -> {
+                    postView.logic();
+                    start();
+                }
+                case 3 -> {
+                    regionView.logic();
+                    start();
+                }
                 case 4 -> {
                     ClientInput.getScanner().close();
                     HibernateSessionFactory.getSessionFactory().close();
